@@ -1,5 +1,7 @@
 # Google Search Console for Python
 
+Forked to return mock data in my LiveProject turorials. See https://liveproject.manning.com/
+
 [![Build Status](https://travis-ci.org/joshcarty/google-searchconsole.svg?branch=master)](https://travis-ci.org/joshcarty/google-searchconsole)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
