@@ -39,12 +39,37 @@ class Account:
         >>> account.webproperties[0]
         <searchconsole.account.WebProperty(url='...')>
         """
-        raw_properties = self.service.sites().list().execute().get(
-            'siteEntry', [])
+        #raw_properties = self.service.sites().list().execute().get(
+        #    'siteEntry', [])
+
+        #anonymized site properties
+        raw_properties = [{'permissionLevel': 'siteFullUser', 'siteUrl': 'http://sitename_1/'},
+ {'permissionLevel': 'siteFullUser', 'siteUrl': 'http://sitename_2/'},
+ {'permissionLevel': 'siteOwner', 'siteUrl': 'sc-domain:sitename_3'},
+ {'permissionLevel': 'siteFullUser', 'siteUrl': 'https://sitename_4/'},
+ {'permissionLevel': 'siteFullUser', 'siteUrl': 'https://sitename_5/'},
+ {'permissionLevel': 'siteRestrictedUser', 'siteUrl': 'https://sitename_6/'},
+ {'permissionLevel': 'siteFullUser', 'siteUrl': 'https://sitename_7/'},
+ {'permissionLevel': 'siteFullUser', 'siteUrl': 'https://sitename_8/'},
+ {'permissionLevel': 'siteRestrictedUser', 'siteUrl': 'http://sitename_9/'},
+ {'permissionLevel': 'siteOwner', 'siteUrl': 'http://sitename_10/'},
+ {'permissionLevel': 'siteOwner', 'siteUrl': 'http://sitename_11/'},
+ {'permissionLevel': 'siteOwner', 'siteUrl': 'http://sitename_12/'},
+ {'permissionLevel': 'siteFullUser', 'siteUrl': 'http://sitename_13/'},
+ {'permissionLevel': 'siteFullUser', 'siteUrl': 'http://sitename_14/'},
+ {'permissionLevel': 'siteFullUser', 'siteUrl': 'https://sitename_15/'},
+ {'permissionLevel': 'siteOwner', 'siteUrl': 'http://sitename_16/'},
+ {'permissionLevel': 'siteOwner', 'siteUrl': 'http://sitename_17/'},
+ {'permissionLevel': 'siteUnverifiedUser', 'siteUrl': 'http://sitename_18/'}]
 
         return [WebProperty(raw, self) for raw in raw_properties]
+        return 
 
     def __getitem__(self, item):
+
+        #anonymize
+        return WebProperty( {'permissionLevel': 'siteOwner', 'siteUrl': 'http://sitename_11/'}, self)
+
         if isinstance(item, str):
             properties = [p for p in self.webproperties if p.url == item]
             web_property = properties[0] if properties else None
