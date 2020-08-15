@@ -233,12 +233,18 @@ class Query:
 
     def get(self):
 
-        report = None
-        cursor = self
-        is_enough = False
-        is_complete = False
+        #anon
+        #return self.execute()
 
-        while not (is_enough or is_complete):
+        #
+        #skip pagination
+
+        report = self.execute()
+        cursor = self
+        is_enough = len(report.rows)
+        is_complete = report.is_complete
+
+        while False: #not (is_enough or is_complete):
             chunk = cursor.execute()
 
             if report:
@@ -268,9 +274,20 @@ class Query:
         url = self.api.url
 
         try:
-            self._wait()
-            response = self.api.account.service.searchanalytics().query(
-                siteUrl=url, body=raw).execute()
+            #anonymize
+
+            #self._wait()
+            #response = self.api.account.service.searchanalytics().query(
+            #    siteUrl=url, body=raw).execute()
+            #TODO absolute path within git repo
+            import pickle
+            with open("anon_rows.pkl", "rb") as f:
+              rows = pickle.load(f)
+
+              response = dict()
+              response["responseAggregationType"] = "byPage"
+              response["rows"] = rows
+
         except googleapiclient.errors.HttpError as e:
             raise e
 
