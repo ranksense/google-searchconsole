@@ -45,6 +45,9 @@ def authenticate(client_config, credentials=None, serialize=None, flow="web"):
         ...     credentials='auth/credentials.dat'
         ... )
     """
+    
+    #return mocked object
+    return Account(None, credentials)
 
     if not credentials:
 
